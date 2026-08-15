@@ -20,3 +20,8 @@ resource "azurerm_resource_group" "anuj1" {
   name     = "book-rg"
   location = "West Europe"
 }
+
+resource "azurerm_resource_group" "anuj2" {
+  name     = "rg-pen"
+  location = "West Europe"
+}
