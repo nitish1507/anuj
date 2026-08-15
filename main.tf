@@ -15,3 +15,8 @@ resource "azurerm_resource_group" "anuj" {
   name     = "anuj-rg"
   location = "West Europe"
 }
+
+resource "azurerm_resource_group" "anuj1" {
+  name     = "book-rg"
+  location = "West Europe"
+}
