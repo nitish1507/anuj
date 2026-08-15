@@ -21,6 +21,8 @@ resource "azurerm_resource_group" "anuj1" {
   location = "West Europe"
 }
 
+resource "azurerm_resource_group" "abcd" {
+  name     = "pathshala-rg"
 resource "azurerm_resource_group" "anuj2" {
   name     = "rg-pen"
   location = "West Europe"
