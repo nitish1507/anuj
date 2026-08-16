@@ -17,15 +17,15 @@ resource "azurerm_resource_group" "anuj" {
 }
 
 resource "azurerm_resource_group" "anuj1" {
-  name     = "book-rg"
+  name     = "anuj-rg2"
   location = "West Europe"
 }
 
 resource "azurerm_resource_group" "abcd" {
-  name     = "pathshala-rg"
+  name     = "anuj-rg3"
 location = "West Europe"
 }
 resource "azurerm_resource_group" "anuj2" {
-  name     = "rg-pen"
+  name     = "anuj-rg4"
   location = "West Europe"
 }
