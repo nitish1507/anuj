@@ -1,5 +1,4 @@
-name: anuj
-
+name: Terraform self hosted runner Deployment
 on:
   push:
     branches:
@@ -10,42 +9,72 @@ on:
     branches:
       - main
 
-  workflow_dispatch:
-
 permissions:
   contents: read
-  id-token: write
 
 jobs:
   terraform:
-    runs-on: ubuntu-latest
+    name: Terraform self hosted runner Deployment
+    runs-on:
+      - self-hosted
+      - windows
+      - x64
 
     defaults:
       run:
+        shell: powershell
         working-directory: .
 
     steps:
       - name: Checkout Code
         uses: actions/checkout@v4
 
-      - name: Azure Login
-        uses: azure/login@v2
-        with:
-          client-id: ${{ secrets.AZURE_CLIENT_ID }}
-          tenant-id: ${{ secrets.AZURE_TENANT_ID }}
-          subscription-id: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
+      - name: Check Azure CLI
+        run: |
+          Write-Host "AZURE CLI VERSION"
+          az version
 
-      - name: Setup Terraform
-        uses: hashicorp/setup-terraform@v3
+      - name: Check Azure Login
+        run: |
+          Write-Host "CURRENT WINDOWS USER"
+          whoami
+
+          Write-Host "AZURE ACCOUNT"
+          az account show --output table
+
+      - name: Check Terraform
+        run: |
+          Write-Host "TERRAFORM PATH"
+          where.exe terraform
+
+          Write-Host "TERRAFORM VERSION"
+          terraform version
+
+      - name: Check Terraform Files
+        run: |
+          Write-Host "CURRENT DIRECTORY"
+          Get-Location
+
+          Write-Host "TERRAFORM FILES"
+          Get-ChildItem -Path . -Filter *.tf
 
       - name: Terraform Init
-        run: terraform init
+        run: |
+          Write-Host "TERRAFORM INIT"
+          terraform init
 
       - name: Terraform Validate
-        run: terraform validate
+        run: |
+          Write-Host "TERRAFORM VALIDATE"
+          terraform validate
 
       - name: Terraform Plan
-        run: terraform plan
+        run: |
+          Write-Host "TERRAFORM PLAN"
+          terraform plan -no-color
 
       - name: Terraform Apply
-        run: terraform apply -auto-approve
+        if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+        run: |
+          Write-Host "TERRAFORM APPLY"
+          terraform apply -auto-approve
