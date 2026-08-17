@@ -16,3 +16,7 @@ resource "azurerm_resource_group" "anuj" {
   location = "West Europe"
 }
 
+resource "azurerm_resource_group" "mohit11" {
+  name = "mohit-rg"
+  location = "west europe"
+}
