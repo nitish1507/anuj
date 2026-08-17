@@ -1,0 +1,49 @@
+name: Anuj self hosted runner 
+on:
+  push:
+    branches:
+      - main
+      - feature
+
+  pull_request:
+    branches:
+      - main
+
+permissions:
+  contents: read
+
+jobs:
+  terraform:
+    name: Anuj self hosted runner Deployment
+    runs-on:
+      - self-hosted
+      - windows
+      - x64
+
+    defaults:
+      run:
+        shell: powershell
+        working-directory: .
+
+    steps:
+  
+      - name: Terraform Init
+        run: |
+          Write-Host "TERRAFORM INIT"
+          terraform init
+
+      - name: Terraform Validate
+        run: |
+          Write-Host "TERRAFORM VALIDATE"
+          terraform validate
+
+      - name: Terraform Plan
+        run: |
+          Write-Host "TERRAFORM PLAN"
+          terraform plan -no-color
+
+      - name: Terraform Apply
+        if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+        run: |
+          Write-Host "TERRAFORM APPLY"
+          terraform apply -auto-approve
