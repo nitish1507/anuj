@@ -33,4 +33,7 @@ resource "azurerm_storage_account" "stdemorgddd2" {
   account_replication_type = "LRS"
 }
 
+Adfghdsedf
 
+dsafgdsd
+dsafbvdsasd
