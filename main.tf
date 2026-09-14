@@ -33,10 +33,4 @@ resource "azurerm_storage_account" "stdemorgddd2" {
   account_replication_type = "LRS"
 }
 
-resource "azurerm_storage_account" "stdddddddadaemorg2" {
-  name                     = "stdevoasfrepsdemo003"
-  location                 = "Central India"
-  resource_group_name      = "rg-dedffdsvops-demo"
-  account_tier             = "Standard"
-  account_replication_type = "LRS"
-}
+
